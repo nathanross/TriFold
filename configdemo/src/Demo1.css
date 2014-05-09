@@ -1,0 +1,116 @@
+/** 
+TriFold/ConfigDemo/style/Demo1.css
+styling mixin for ConfigDemo's use of a TriFold template.
+Copyright 2013-2014 Nathan Ross (nrossit2@gmail.com)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+/*BEGINtemplate*/
+/* these two rules need to stay at the top 
+	as cfgdemo auto adjusts them and assumes
+	this location. don't move them without changing
+	that assumption.*/
+
+.tri-fold_colContentPlusBorder > div {
+	width:234px;
+	height:390px;
+}
+
+.tri-fold_colContentPlusBorder > div {
+	background-color: rgba(240, 240, 240, 1); 
+}
+
+.tri-fold_outerParent {
+	/* background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgYGD4z0AswK4SAFXuAf8EPy+xAAAAAElFTkSuQmCC); /* */ 
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAMklEQVQYlWNgYGAwZkAFxjjEcApgSOKTIGgSVpOxKcKqmGiFRFuNUwCHGFaT8erCGuAAtV8HLQ/j6goAAAAASUVORK5CYII=); /* specific to this style */
+	background-color: rgb(248,248,248); /* specific to this style */
+}
+
+.tri-fold_innerParent {	
+	background-color: rgba(255, 255, 255, 1); 
+}
+.tri-fold_outerParent:not(.onPhone) .tri-fold_innerParent {
+	border-radius: 10px;
+}
+/*ENDtemplate*/
+/* --------- Begin ConfigDemo-specific styling --------- */
+
+		/* change the below three if you change xyMinColRes.
+		if you'll be (for any unlikely reason) setting xyMinColRes
+		more than once in an app, you could choose to not use
+		a border, or one based on percentage lengths through
+		adjusting the parentDiv, tri-fold_colContentPlusBorder */
+		
+/* tabs jut down begin */
+
+
+.sim-tabpanels .leftOfSelected { background: none !important; }
+.sim-tabpanels .rightOfSelected { background: none !important; }
+.sim-tabpanels .underSelected { visibility: hidden !important; }
+
+.sim-tabpanels .sim-tabunselected .sim-tabHundred {
+}
+
+.sim-tabpanels .sim-tabContents { 
+	border-top: none !important;
+	border-top-left-radius: 0 !important;
+	border-top-right-radius: 0 !important;
+	border-right: none !important;
+	border-left: none !important;
+}
+
+/* little too hacky for my tastes but... does the job */
+
+.sim-tabpanels .sim-tabgroup > div:first-of-type {
+	margin-left: 0px !important;
+	width: 105px;
+}
+
+.sim-tabpanels .sim-tabgroup > div:last-of-type {
+	margin-left: 10px;
+}
+.sim-tabpanels .sim-tabgroup > div:first-of-type .sim-tabContents {
+	padding-left: 30px;
+}
+.sim-tabpanels .sim-tabgroup > div:last-of-type .sim-tabContents {
+	padding-left: 30px;
+}
+.sim-tabpanels .sim-tabgroup > div.sim-tabunselected:first-of-type .sim-tabHundred {	
+	border-bottom-right-radius: 10%;
+	box-shadow: -2px -1px 4px -3px inset;
+}
+.sim-tabpanels .sim-tabgroup > div.sim-tabunselected:last-of-type .sim-tabHundred {	
+	border-bottom-left-radius: 10%;
+	box-shadow: 2px -1px 4px -3px inset;
+}
+
+/* tabs jut down end */
+.sim-tabpanels {
+	height: 100%;
+}
+.sim-tabpanels div.sim-tabunselected div.sim-tabContents {
+	background-color: inherit;
+}
+/*config demo only */
+
+
+.sim-tabpanels div.sim-tabContents {
+	padding: 7px 5px 6px 5px;
+}
+.sim-tabpanels div.sim-tabunselected {
+	background-color: rgb(219,219,219) !important; 
+}
+.configcol, .configcolcontent,
+.previewcol, .previewcolcontent {
+	height: 100%;
+}

@@ -1,0 +1,494 @@
+/** 
+TriFold/configdemo/style/ConfigDemo.css
+base ConfigDemo styling, independent of template
+Copyright 2013-2014 Nathan Ross (nrossit2@gmail.com)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+/* include's TriFold's standard 'base' css. */
+/*BEGINtemplate*/
+body, html {
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+}
+#fillScreen {
+	position: absolute;
+	height: auto;
+	bottom: 0px;
+	top: 0px;
+	width: auto;
+	margin: auto;
+	left: 0px;
+	right: 0px;
+}
+.tri-fold_outerParent {
+	font-size: 50%;
+}
+
+.tri-fold_switchbarBtn { 
+	border: none; 
+	top: 27%;
+}
+.tri-fold_switchbarBtnSide0 { }
+.tri-fold_switchbarBtnSide1 { }
+
+.tri-fold_buttonCol0, .tri-fold_buttonCol1, .tri-fold_buttonCol2 {
+	background-size: auto 100%;
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
+.tri-fold_switchbar {
+	background: none !important;
+}
+.sim-tabgroup > div:first-of-type {
+	margin-left: 25px !important;
+}
+/*ENDtemplate*/
+/* --------- Begin ConfigDemo-specific styling --------- */
+
+/*div.svg rule here doesn't belong in SIM because users 
+of SIM don't all necessarily want to have a single 
+div.svg be the only element at a div at any given 
+time. semantically, addSvg should be able to add more 
+than one if the user wants. */
+div.svg { 
+	height:100%;
+	width: 100%;
+}
+/* Begin Typefaces and Font-sizes */
+
+@font-face {
+    font-family: 'ralewaylight';
+    src: url('../resources/raleway-light.eot');
+    src: url('../resources/raleway-light.eot?#iefix') format('embedded-opentype'),
+         url('../resources/raleway-light.woff') format('woff'),
+         url('../resources/raleway-light.ttf') format('truetype'),
+         url('../resources/raleway-light.svg#ralewaylight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'ralewaybold';
+    src: url('../resources/raleway-bold.eot');
+    src: url('../resources/raleway-bold.eot?#iefix') format('embedded-opentype'),
+         url('../resources/raleway-bold.woff') format('woff'),
+         url('../resources/raleway-bold.ttf') format('truetype'),
+         url('../resources/raleway-bold.svg#ralewaybold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'ralewaysemibold';
+    src: url('../resources/raleway-semibold.eot');
+    src: url('../resources/raleway-semibold.eot?#iefix') format('embedded-opentype'),
+         url('../resources/raleway-semibold.woff') format('woff'),
+         url('../resources/raleway-semibold.ttf') format('truetype'),
+         url('../resources/raleway-semibold.svg#ralewaysemibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'podkovaregular';
+    src: url('../resources/podkova-regular.eot');
+    src: url('../resources/podkova-regular.eot?#iefix') format('embedded-opentype'),
+         url('../resources/podkova-regular.woff') format('woff'),
+         url('../resources/podkova-regular.ttf') format('truetype'),
+         url('../resources/podkova-regular.svg#podkovaregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body:not(.systemFontsOnly) {
+	font-family: "ralewaylight";
+}
+
+body.systemFontsOnly {
+	font-family: Verdana, Arial;
+}
+
+div.tri-fold_outerParent:not(.systemFontsOnly) .em1 {
+	font-family: "ralewaysemibold";
+}
+div.tri-fold_outerParent.systemFontsOnly .em1 {
+	font-weight: bold;
+}
+
+div.tri-fold_outerParent:not(.systemFontsOnly) .em2 {
+	font-family: "ralewaybold";
+}
+div.tri-fold_outerParent.systemFontsOnly .em2 {
+	font-weight: bold;
+}
+
+/* End Typefaces and Font-sizes */
+/* begin brightbgarea reloadBehaviorButton */
+
+.brightbgarea div.reloadBehaviorButton.sim-pushbutton-disabled .sim-pushbutton-face {
+background: #d9d9d9; /* Old browsers */
+background: -moz-linear-gradient(top, #d9d9d9 0%, #c0c0c0 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d9d9d9), color-stop(100%,#c0c0c0)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #d9d9d9 0%,#c0c0c0 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #d9d9d9 0%,#c0c0c0 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #d9d9d9 0%,#c0c0c0 100%); /* IE10+ */
+background: linear-gradient(to bottom, #d9d9d9 0%,#c0c0c0 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9d9d9', endColorstr='#c0c0c0',GradientType=0 ); /* IE6-9 */
+}
+
+.brightbgarea div.reloadBehaviorButton.sim-pushbutton-enabled a > div {
+background: #d0dbe2; /* Old browsers */
+background: -moz-linear-gradient(top, #d0dbe2 0%, #adc2d3 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d0dbe2), color-stop(100%,#adc2d3)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #d0dbe2 0%,#adc2d3 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #d0dbe2 0%,#adc2d3 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #d0dbe2 0%,#adc2d3 100%); /* IE10+ */
+background: linear-gradient(to bottom, #d0dbe2 0%,#adc2d3 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0dbe2', endColorstr='#adc2d3',GradientType=0 ); /* IE6-9 */
+}
+
+.brightbgarea div.reloadBehaviorButton.sim-pushbutton-enabled a:hover > div {
+
+background: -moz-linear-gradient(top, #c9d9e5 0%, #82b0d6 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c9d9e5), color-stop(100%,#82b0d6)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #c9d9e5 0%,#82b0d6 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #c9d9e5 0%,#82b0d6 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #c9d9e5 0%,#82b0d6 100%); /* IE10+ */
+background: linear-gradient(to bottom, #c9d9e5 0%,#82b0d6 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c9d9e5', endColorstr='#82b0d6',GradientType=0 ); /* IE6-9 */
+
+}
+.brightbgarea div.reloadBehaviorButton.sim-pushbutton-enabled a:active > div {
+	background: #c9d9e5; /* Old browsers */
+	background: -moz-linear-gradient(top, #c9d9e5 0%, #7fb6d8 17%, #84b8d8 85%, #9ab9d3 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c9d9e5), color-stop(17%,#7fb6d8), color-stop(85%,#84b8d8), color-stop(100%,#9ab9d3)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #c9d9e5 0%,#7fb6d8 17%,#84b8d8 85%,#9ab9d3 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #c9d9e5 0%,#7fb6d8 17%,#84b8d8 85%,#9ab9d3 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #c9d9e5 0%,#7fb6d8 17%,#84b8d8 85%,#9ab9d3 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #c9d9e5 0%,#7fb6d8 17%,#84b8d8 85%,#9ab9d3 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c9d9e5', endColorstr='#9ab9d3',GradientType=0 ); /* IE6-9 */
+}
+
+/* end brightbgarea reloadBehaviorButton */
+/* begin descript panel */
+.descriptcol {
+	width: 100%;
+	height: 100%;
+}
+
+#descript {
+	max-width: 250px;
+	padding: 10px;
+	font-size: 128%;
+}
+#descript .em_h {
+	font-family: "podkovaregular";
+	font-size: 250%;
+	text-align: left;
+	padding-left: 20px;
+}
+#descript .logo {
+	margin-left: 3px;
+	width: 79px;
+	height: 53px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.logo {
+
+	margin-left: 3px;
+	width: 79px;
+	height: 53px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#descript table tr > td:first-of-type {
+	vertical-align: top;
+}
+#descript table tr > td:last-of-type {
+	padding-left: 7px;
+}
+/* begin config->visual panel  */
+
+/* these refer to specific opts.
+e.g. the "margin" spinbutton.
+*/
+.margins, .padding, .slidespeed {
+	margin-top: 8px;
+}
+
+/* the labels in individual entrypanels for Opts with multiple are called 
+entry-labels */
+div.visualconfig {
+	padding-left: 15px;
+	padding-top: 15px;
+}
+.visualconfig .label { 
+	font-size: 110%;
+}
+
+.visualconfig .styleSelector {
+	padding-bottom: 5px;
+}
+.visualconfig .styleSelector > div {
+	width: 20px;
+	height: 8px;
+	margin-left: 10px;
+	display: inline-block;
+}
+
+.visualconfig .styleSelector > div.sim-pushbutton-enabled {
+	width: 20px;
+	height: 8px;
+	margin-left: 10px;
+	display: inline-block;
+	text-decoration: underline;
+}
+
+/* because spinbuttons are defined in ConfigDemo.js, 
+(maybe change that in the future and move them to Similitude?
+but I'm not sure the demand is that high for a spinbutton
+of this particular design).*/
+.brightbgarea .visualconfig .styleSelector > div.sim-pushbutton-disabled {
+	color: #999999;
+}
+.darkbgarea .visualconfig .styleSelector > div.sim-pushbutton-disabled {
+	color: #B0B0B0;
+}
+.visualconfig .mincolres,
+.visualconfig .colspacing {
+	display: inline-block;
+}
+.visualconfig .colspacing {
+	margin-left: 30px;
+}
+.colspacing .label {
+	padding-bottom: 11.5px;
+}
+.margins .label,
+.padding .label, 
+.slidespeed .label {
+	padding-top:1px;
+	padding-bottom:3px;
+	padding-left:20px;
+}
+.visualconfig div.double-row > div.entry-panel {
+	display: inline-block;
+	width: 35px;
+}
+.visualconfig div.double-row > div.entry-panel:not(:first-of-type){
+	margin-left: 8px;
+}
+.visualconfig div.entry-label {
+	width: 100%;
+	text-align: center;
+	font-size: 120%;
+}
+.visualconfig .sim-pushbutton .sim-pushbutton-face {
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	width: 88%;
+	margin-left: 6%;
+}
+
+.visualconfig .sim-pushbutton-disabled div.svg.active,
+.visualconfig .sim-pushbutton-enabled div.svg.inactive {
+	display: none;
+}
+
+.visualconfig .incr, .visualconfig .decr {
+	width: 80%;
+	height: 11px;
+	margin-left: 10%;
+}
+.visualconfig input.double-entry {
+	font-size: 140%;
+    width: 92%;
+    height: 14px;
+	background: none;
+    border: none;
+	text-align: center;
+    padding-left: 3%;
+    padding-right: 4%;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	color: inherit;
+}
+/* end config->visual panel */
+/* begin config->behavior panel */
+
+div.behaviorconfig {
+	padding-left: 10px;
+	padding-top: 15px;
+}
+
+.behaviorconfig table > tr > td:nth-of-type(2) {
+	text-align: center;
+}
+.behaviorconfig table > tr {
+	vertical-align: top;
+}
+
+/*TODO , move some of these rules to Similitude.css
+ as nec. to get its demo page working. */
+
+.behaviorconfig .checkboxrow > div.sim-togglediv {
+	display: inline-block;
+	vertical-align: top;
+}
+.behaviorconfig .checkboxrow .sim-togglediv-face {
+	width: 14px;
+	height: 14px;
+	padding: 1px;
+}
+.behaviorconfig .sim-selectbox {
+	width: 52px;
+	display: inline-block;
+	font-size: 130%;
+	font-family: arial, verdana;
+	text-align: left;
+}
+.behaviorconfig .sim-selectbox.sim-box .sim-listbox {
+	width: inherit;
+}
+.behaviorconfig .sim-selectbox .sim-row {
+	padding-left: 10% !important;
+	vertical-align: middle;
+	padding-top:2px;
+}
+
+.behaviorconfig .sim-selectbox .sim-row {
+	min-height: 14px;
+}
+
+.behaviorconfig .bhvlabel {
+	padding-top: 2px;
+	font-size: 120%;
+	padding-bottom: 2px;
+}
+
+.behaviorconfig .modeopt .sim-selectbox {
+	width: 93px;
+}
+
+.behaviorconfig .secondlayoutopt div.sim-selectbox:last-of-type {
+	margin-left: 9px;
+}
+.behaviorconfig .secondVisOpt div.sim-togglediv:last-of-type {
+	margin-left: 37px;
+} 
+.behaviorconfig .thirdlayout .colnames > div {
+	display: inline-block;
+}
+.behaviorconfig .thirdlayout .colnames > div:not(:first-of-type) {
+	margin-left: 9px;
+}
+.behaviorconfig .thirdvisopt div.sim-togglediv:not(:first-of-type) {
+	margin-left: 8px;
+}
+
+.behaviorconfig .reloadBehaviorButton {
+	height: 27px;
+	width: 69px;
+	padding-left: 70px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.behaviorconfig .reloadBehaviorButton a {
+	color: inherit;
+	text-decoration: inherit;
+}
+.behaviorconfig .reloadBehaviorButton .sim-pushbutton-face {
+	padding: 6px 0px 3px 0px;
+	border-radius: 5px;
+	text-align: center;
+	width: 100%;
+	height: 18px;
+}
+
+/* end config->behavior panel */
+/* begin codePreview panel */
+.previewcol .pane {
+	padding-left: 10px;
+	padding-top: 15px;
+}
+.previewcol .previewheader {
+	padding-bottom: 6px;
+}
+.previewcol .codewindow { 
+	height: 240px;
+	font-family: consolas, Consolas, Monaco, monaco, DejaVu Sans Mono, Droid Sans Mono;
+	width: 100%;
+	max-width: 270px;
+}
+.previewcol .codewindow > div {
+	padding-left: 7px;
+	padding-right: 7px;
+}
+.previewcol .codewindow .indent {
+	margin-left: 15px;
+}
+.previewcol .codewindow .longindent {
+	margin-left: 35px;
+}
+.previewcol .downloadsection {
+	/* border: 1px solid black; /* */
+	margin-top: 12px;
+	margin-left: 25px;
+	width: 175px;
+	height: 65px;
+}
+.previewcol .downloadsection > div {
+	display: inline-block;
+	height: 100%;
+	vertical-align: top;
+}
+.previewcol .downloadsection .iconwrapper {
+	width: 40px;
+}
+.previewcol .downloadsection .downloadicon {
+	height: 40px;
+	width: 100%;
+	margin-top: 2px;
+	margin-left: 2px;
+}
+/* .svgok .previewcol .downloadsection .downloadicon {
+	background-size: 40px;
+} */
+.previewcol .downloadsection .iconwrapper .language {
+	text-align: center;
+	padding-left: 2px;
+	padding-top: 2px;
+	width: 100%;
+	font-weight: bold;
+	font-size: 170%;
+}
+
+.previewcol .downloadsection .infowrapper {
+	width: 110px;
+}
+
+.previewcol .downloadsection .downloadinfo {
+	margin-left: 10px;
+	font-size: 110%;
+}
+/* end codePreview panel */

@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../src/TriFold.css" />
+<link rel="stylesheet" href="style/TriFold-Fullscreen.css" />
+<link rel="stylesheet" href="style/Demo1.css" /><!-- -->
+<!--<link rel="stylesheet" href="style/Demo2.css" /><!-- -->
+<!--<link rel="stylesheet" href="style/Demo3.css" /><!-- -->
+<script src="../src/TriFold-0.1.js"></script><!-- -->
+<script>
+	if(window.attachEvent) {
+		window.attachEvent('onload', pageLoadScript);
+	} else {
+		if(window.onload) {
+			var curronload = window.onload;
+			var newonload = function() {
+				curronload();
+				pageLoadScript();
+			};
+			window.onload = newonload;
+		} else {
+			window.onload = pageLoadScript;
+		}
+	} 
+	//begin customized config
+	function createTriFold(parentDiv, leftDiv, centDiv, rightDiv) {
+		
+		var Behavior = TriFold.DefaultBehavior;
+		var behavior = new Behavior();
+		window.behavior = behavior;
+		behavior.setDefaultOneCol(TriFold.RIGHT);
+		behavior.setDefaultTwoCol([TriFold.LEFT,TriFold.CENT]);
+		behavior.setVisTwoCol([]);
+		behavior.setRolloverTwoCol(Behavior.NO_ROLLOVER);
+		behavior.setMode(Behavior.ONE_AVAILABLE, Behavior.SLIDE);
+		behavior.setMode(Behavior.TWO_AVAILABLE, Behavior.CAN_MINIMIZE);
+		behavior.setMode(Behavior.THREE_AVAILABLE, Behavior.SLIDE);
+		behavior.setVisThreeCol([TriFold.CENT]);
+		behavior.setOrderedThreeCol(true);
+		var triFold = new TriFold(behavior, leftDiv, centDiv, rightDiv);
+		triFold.addTo(parentDiv);
+		return triFold;
+	}
+	//end customized config
+	
+	function pageLoadScript() {
+		
+		var rootPanel = document.getElementById("fillScreen");
+		var cols = [];
+		var e, f;
+		for (var i=0;i<3;i++) {
+			e = document.createElement("div");
+			e.innerHTML = i.toString();
+			cols.push(e);
+		}
+		window.triFold = new createTriFold(rootPanel, cols[0], cols[1], cols[2]);
+		window.triFold.addTo(rootPanel);
+	}
+</script>
+</head>
+<body>
+	<div id="fillScreen">
+	</div>
+</body>
+</html>

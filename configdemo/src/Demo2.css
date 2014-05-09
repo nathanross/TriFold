@@ -1,0 +1,41 @@
+/** 
+TriFold/configdemo/style/Demo2.css
+styling mixin for ConfigDemo's use of a TriFold template.
+Copyright 2013-2014 Nathan Ross (nrossit2@gmail.com)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+/*BEGINtemplate*/
+.tri-fold_outerParent {
+	/* background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgYGD4z0AswK4SAFXuAf8EPy+xAAAAAElFTkSuQmCC); /* */ 
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAMklEQVQYlWNgYGAwZkAFxjjEcApgSOKTIGgSVpOxKcKqmGiFRFuNUwCHGFaT8erCGuAAtV8HLQ/j6goAAAAASUVORK5CYII=); /* specific to this style */
+	background-color: rgb(248,248,248); /* specific to this style */
+}
+.tri-fold_innerParent {	
+	background-color: rgba(255, 255, 255, 1); 
+}
+.tri-fold_outerParent:not(.onPhone) .tri-fold_innerParent {
+	border-radius: 10px;
+}
+.tri-fold_colContent {
+	height: 100%;
+	background-color: white;
+}
+/*ENDtemplate*/
+
+/* --------- Begin ConfigDemo-specific styling --------- */
+
+.sim-tabpanels {
+	padding-top: 2px;
+}

@@ -1,0 +1,143 @@
+/** 
+TriFold/configdemo/style/Demo3.css
+styling mixin for ConfigDemo's use of a TriFold template.
+Copyright 2013-2014 Nathan Ross (nrossit2@gmail.com)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+/*BEGINtemplate*/
+body {
+	text-decoration: underline;
+	/* background: url("../img/denim_2X.png") repeat; */
+	background-color: #3d434a;
+	color: white;
+}
+
+.tri-fold_colContent {
+	height: 100%;
+	background-color: #3d434a; 
+}
+/*ENDtemplate*/
+
+/* --------- Begin ConfigDemo-specific styling --------- */
+
+.sim-tabpanels {
+padding-top: 2px;
+}
+
+/* bright versions of graphics */
+
+/* .tri-fold_buttonCol0 {
+	background-position: 2px 0px;
+} */
+
+
+.sim-tabpanels div.sim-header div.sim-tabContents { 
+	border-top-color: white;
+	border-right-color: white;
+	border-left-color: white;
+}
+
+.darkbgarea .sim-selectbox.sim-box {
+	background-color: #FFFFFF;
+}
+.sim-selectbox.sim-box > div.sim-dispbg {
+	background-color: #3d434a;
+}
+
+.sim-selectbox.sim-box > div.sim-listbox > div {
+	background-color: #3d434a;
+	border-bottom: 1px solid #555555;
+}
+
+.sim-selectbox > div.sim-listbox > div[data-hover="true"] {
+	/* background-color: #AAE;
+	color: #000000; */
+	background-color: #192934;
+}
+
+.sim-selectbox > div.sim-listbox > div[data-hover="false"] {
+	color: #FFFFFF;
+}
+
+div.sim-togglediv-enabled.sim-box {
+	background-color: #FFFFFF;
+}
+div.sim-togglediv-enabled.sim-box .sim-togglediv-facebg {
+	background-color: #3d434a;
+}
+div.sim-togglediv-disabled.sim-box {
+	background-color: #888888;
+}
+div.sim-togglediv-disabled.sim-box .sim-togglediv-facebg {
+	background-color: #3d434a;
+}
+
+.sim-tab > .rightOfSelected {
+	box-shadow: -1px 0px 0px 0px rgba(255,255,255,1);
+}
+
+.sim-tab > .leftOfSelected {
+	box-shadow: 1px 0px 0px 0px rgba(255,255,255,1);
+}
+
+
+.sim-tab > .leftOfSelected {
+background: -moz-linear-gradient(left,  rgba(255,255,255,0) 0%, rgba(255,255,255,0.58) 42%, rgba(255,255,255,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(42%,rgba(255,255,255,0.58)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.58) 42%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.58) 42%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.58) 42%,rgba(255,255,255,1) 100%); /* IE10+ */
+background: linear-gradient(to right,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.58) 42%,rgba(255,255,255,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 */
+}
+
+.sim-tab > .rightOfSelected  {
+background: -moz-linear-gradient(left,  rgba(255,255,255,1) 0%, rgba(255,255,255,0.58) 58%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,1)), color-stop(58%,rgba(255,255,255,0.58)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.58) 58%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.58) 58%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.58) 58%,rgba(255,255,255,0) 100%); /* IE10+ */
+background: linear-gradient(to right,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.58) 58%,rgba(255,255,255,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 */
+}
+
+
+
+/* reloadBehaviorButton */
+
+.darkbgarea div.reloadBehaviorButton.sim-pushbutton-disabled .sim-pushbutton-face {
+background: #5e5e5e; 
+}
+.darkbgarea div.reloadBehaviorButton.sim-pushbutton-enabled a > div {
+background: #3c4c60; /* Old browsers */
+}
+
+.darkbgarea div.reloadBehaviorButton.sim-pushbutton-enabled a:hover > div {
+background: #303c4c; /* Old browsers */
+}
+.darkbgarea div.reloadBehaviorButton.sim-pushbutton-enabled a:active > div {
+background: #303c4c; /* Old browsers */
+background: -moz-linear-gradient(top, #303c4c 0%, #344254 11%, #344254 84%, #303c4c 98%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#303c4c), color-stop(11%,#344254), color-stop(84%,#344254), color-stop(98%,#303c4c)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #303c4c 0%,#344254 11%,#344254 84%,#303c4c 98%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #303c4c 0%,#344254 11%,#344254 84%,#303c4c 98%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #303c4c 0%,#344254 11%,#344254 84%,#303c4c 98%); /* IE10+ */
+background: linear-gradient(to bottom, #303c4c 0%,#344254 11%,#344254 84%,#303c4c 98%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#303c4c', endColorstr='#303c4c',GradientType=0 ); /* IE6-9 */
+}
+
+
+
+
