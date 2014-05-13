@@ -3,4 +3,4 @@ python3 $PATH_TILTH -d --path-closure $PATH_CLOSURE --path-yui $PATH_YUICOMP -s 
 wait $!
 python3 $PATH_TILTH -d --path-closure $PATH_CLOSURE --path-yui $PATH_YUICOMP -s "bridge/" -p"out/"  "tilth_configdemo.csv"
 wait $!
-cat out/bridge/index.php | sed -r "s/\.\.\/resources/resources/g" > out.inlined.html
+cat out/bridge/index.php | sed -r "s/\.\.\/resources/resources/g" | sed -r "s/<\?php\s+\?>//g" > out.minified_inlined.html

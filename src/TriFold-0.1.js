@@ -289,7 +289,7 @@ function _onAddedAndPageLoad() {
 			_manips[i].isAddedToDom();
 		}
 	}
-	library.ResizeSensor(_outerParent, resizeCall);
+	window.addEventListener("resize", resizeCall);
 }
 
 //TODO come up with a better solution to the early drawing bug.
@@ -2457,16 +2457,10 @@ onAvailChange : function(newcolavail) { //E void (int)
 };
 
 // ------- End DefaultBehavior -----------
-
+/*
 
 
 TriFold.ResizeSensor = function(element, callback) {
-        /**
-         * Adds a listener to the over/under-flow event.
-         *
-         * @param {HTMLElement} element
-         * @param {Function}    callback
-         */
         function addResizeListener(element, callback) {
             if (window.OverflowEvent) {
                 //webkit
@@ -2484,10 +2478,6 @@ TriFold.ResizeSensor = function(element, callback) {
             }
         }
 
-        /**
-         *
-         * @constructor
-         */
         function EventQueue() {
             this.q = [];
             this.add = function(ev) {
@@ -2502,11 +2492,6 @@ TriFold.ResizeSensor = function(element, callback) {
             };
         }
 
-        /**
-         * @param {HTMLElement} element
-         * @param {String}      prop
-         * @returns {String|Number}
-         */
         function getComputedStyle(element, prop) {
             if (element.currentStyle) {
                 return element.currentStyle[prop];
@@ -2517,11 +2502,6 @@ TriFold.ResizeSensor = function(element, callback) {
             }
         }
 
-        /**
-         *
-         * @param {HTMLElement} element
-         * @param {Function}    resized
-         */
         function attachResizeEvent(element, resized) {
             if (!element.resizedAttached) {
                 element.resizedAttached = new EventQueue();
@@ -2607,4 +2587,4 @@ TriFold.ResizeSensor = function(element, callback) {
         } else {
             attachResizeEvent(element, callback);
         }
-};
+}; */
