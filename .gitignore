@@ -1,3 +1,7 @@
 /_
 configdemo/_
+configdemo/out/
+configdemo/bridge/
+configdemo/out.minified_inlined.html
+configdemo/out.inlined.html
 /debug/style

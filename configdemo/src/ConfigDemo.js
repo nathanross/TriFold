@@ -93,6 +93,7 @@ window.changedMinColRes = function(xyMin) {
 };
 
 window.b64toBlob = function(str) {
+	console.log(str);
 	var decoded = atob(str);
 	var i, il = decoded.length;
 	var array = new Uint8Array(il);
@@ -177,7 +178,14 @@ var ZipModder = function(src, srcType, fsOps, replacers) {
 			this.zipObjectCreated = true;
 			this.zipObject = new JSZip(
 			(this.srcType === ZipModder.B64)? 
-			window.b64toBlob(this.data, '', 512):this.data);
+			// callback is a fix to allow these largest 
+			// of variables to be loaded last. ultimately it
+			// should take the form of a callback, but I really
+			// not sure it, a url, and a blob should all share
+			// share a variable name. OTOH this is JS and it's
+			// to be expected that there will sometimes be
+			// patterns that only make sense as in a dynamic language.
+			window.b64toBlob(this.src(), '', 512):this.data);
 		}
 		var i,j,text;
 		var ziptmp = this.zipObject;
@@ -226,13 +234,13 @@ var replaceConfigSection = function(fileText, argsDict) {
 window.downloadCallbacks = {};
 
 //window.downloadCallbacks[JS] = new ZipModder("resources/TriFold_Example.zip",ZipModder.URL,[],[
-window.downloadCallbacks[JS] = new ZipModder(window.TriFold_Example,ZipModder.B64,[],[
+window.downloadCallbacks[JS] = new ZipModder(function() { return window.TriFold_Example; },ZipModder.B64,[],[
 new Replacer("TriFold_Example/TriFold-Demo.html",
 [replaceStyleValues,replaceConfigSection])
 ]);
 
 //window.downloadCallbacks[GWT] = new ZipModder("resources/GWTriFold_SampleApp.zip", ZipModder.URL,[],[
-window.downloadCallbacks[GWT] = new ZipModder(window.GWTriFold_Example, ZipModder.B64,[],[
+window.downloadCallbacks[GWT] = new ZipModder(function() { return window.GWTriFold_Example; }, ZipModder.B64,[],[
 new Replacer("GWTriFold_SampleApp/src/com/website/sample/client/Sample.java",
 [replaceConfigSection]),
 new Replacer("GWTriFold_SampleApp/src/com/website/sample/Sample.gwt.xml",

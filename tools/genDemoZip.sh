@@ -45,7 +45,7 @@ else
 fi
 cat ../debug/TriFold-Demo.html | sed -r 's/\.\.\/src\/(TriFold[0-9\.\-]*)\.css/style\/\1'${mintext}'.css/g' | sed -r 's/\.\.\/src\/(TriFold[0-9\.\-]*)\.js/scripts\/\1'${mintext}'.js/g' > tfd/TriFold-Demo.html
 mv tfd TriFold_Example
-zip -q -r /tmp/TriFold_Example.zip TriFold_Example
+zip -q -Z store -r /tmp/TriFold_Example.zip TriFold_Example
 if [[ ("$#" -gt 0 && "$1" = "b64") || ("$#" -gt 1 && "$2" = "b64") ]]
 then
 echo -n "window.TriFold_Example=\"" > /tmp/TriFold_Example_base64.js

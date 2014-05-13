@@ -1,0 +1,45 @@
+Contents:
+1. How the minifying script gets you 33% size savings, and how to use it.
+2. How to use this tool so it doesn't break, and doesn't mangle variables for export.
+
+1. How the optimizing script minifies TriFold.js 
+
+Tri-Fold uses a variety of complex prototyping patterns that make it incompatible with certain automated minifying algorithms (Like Closure Compiler advance mode). 
+
+The most that is available without breaking Tri-Fold are optimizations like Closure Compiler's local variable renaming (aka SIMPLE_OPTIMIZATIONS).
+
+To make up for this, we use a minifying script which renames all functions + vars not meant for export, with the exception of those that share a name with a JS keyword. The script also removes all lines which contain the directive: "//#". Together these reduce the JS file to 66% of what Simple Optimizations alone would produce.
+
+So the minifying process looks like this:
+    python3 trifoldMinifier.py TriFold.js > mtmp-TriFold.js
+    java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS mtmp-TriFold.js > TriFold.min.js
+
+This is automated in the script minify.sh, (e.g. minify.sh TriFold.js), 
+
+In either case, to run the first minifying step you'll need python3 installed, to run the second you'll need a copy of Google's Closure Compiler's "compiler.jar" or to use their online closure compiler service.
+
+2. How to use this tool so it doesn't break, and doesn't mangle variables for export.
+    The most straightforward way to do this is to have a view of how trifoldMinifier.py works:
+        it finds all variable names that occur after "this." or "prototype."
+        it excludes all those where the line begins with TriFold (these are "meant for export" names that will not get mangled)
+        it excludes all those from a manually written list of conflicting JS keywords.
+        for each distinct variable name, it maps it to a minified name. So for example, two classes with a this.count instance variable would both get the same mangled variable name like this._i
+        all minified names start with an underscore.
+   
+    "conflicting JS keywords" refers to any keywords which are both:
+        a. an instance variable or method name defined in TriFold.js
+        b. a language keyword (like .call()) or field or method name in an object passed to any TriFold.js class (window, document, console, or any derivative objects), that is _used_ in TriFold.js if the language keyword or external field or method is not used, there's no conflict.
+    You can see how mangling those names (in the way it's done in the script above) won't work. Instead of trying to keep an updated list of every such method or instance, we add keywords as they are a problem. 
+
+    So for example, if you have edited TriFold.js and want to use the minifying script for 33% bandwidth savings on the script, in most cases you won't have to do anything, you can just call the Minifying script. IF you add a public facing method, class, or "static var" (var added to prototype) you just need to make sure any such exposed method or class are on a line beginning with "TriFold."
+
+    In some cases the minifying will break your script because you've introduced a new language keyword or field or method of an external object that conflicts with an existing library field or method. IN this case, here's how to debug it:
+
+minify the js using only python ("python3 trifoldMinifier.py trifold.js > trifold.min.js"), try to use your app, open webconsole, there should be an "undefined variable" - 
+
+now display the minification map by running ("python3 trifoldMinifier.py trifold.js varmap") and it should print out a map of original variable names -> minified names, and an inverted map of the same. In the inverted map (the map of minified names -> variable names) find the corresponding original variable name: that is the variable or keyword that needs to be excluded.
+
+open trifoldMinifier.py and find the list of excluded keywords (such as "call", "add"), and add that excluded keyword or variable. repeat this process until there are no more conflicts.
+
+(another way to find the variable, if you'd like, is to simply in web console click the undefined variable to find its place in the script, and find the corresponding variable in the original script from finding the same function)
+
