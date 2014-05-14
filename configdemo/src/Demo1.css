@@ -24,6 +24,7 @@ limitations under the License.
 .tri-fold_colContentPlusBorder > div {
 	width:234px;
 	height:390px;
+	box-shadow: 4px 4px 4px rgba(50, 50, 50, 0.58);
 }
 
 .tri-fold_colContentPlusBorder > div {

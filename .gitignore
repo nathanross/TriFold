@@ -4,4 +4,6 @@ configdemo/out/
 configdemo/bridge/
 configdemo/out.minified_inlined.html
 configdemo/out.inlined.html
+configdemo/libs/zipTools/GWTriFold_SampleApp_base64.js
+configdemo/libs/zipTools/TriFold_Example_base64.js
 /debug/style

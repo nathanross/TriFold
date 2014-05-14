@@ -126,17 +126,17 @@ body.systemFontsOnly {
 	font-size: 90%;
 }
 
-div.tri-fold_outerParent:not(.systemFontsOnly) .em1 {
+body:not(.systemFontsOnly) .em1 {
 	font-family: "ralewaysemibold";
 }
-div.tri-fold_outerParent.systemFontsOnly .em1 {
+body.systemFontsOnly .em1 {
 	font-weight: bold;
 }
 
-div.tri-fold_outerParent:not(.systemFontsOnly) .em2 {
+body:not(.systemFontsOnly) .em2 {
 	font-family: "ralewaybold";
 }
-div.tri-fold_outerParent.systemFontsOnly .em2 {
+body.systemFontsOnly .em2 {
 	font-weight: bold;
 }
 
@@ -198,6 +198,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c9d9e5', end
 	max-width: 250px;
 	padding: 10px;
 	font-size: 128%;
+}
+#descript a {
+	text-decoration: none;
+}
+#descript a:hover {
+	text-decoration: underline;
 }
 #descript .em_h {
 	font-family: "podkovaregular";
@@ -274,6 +280,10 @@ of this particular design).*/
 .darkbgarea .visualconfig .styleSelector > div.sim-pushbutton-disabled {
 	color: #B0B0B0;
 }
+.visualconfig .buffertext {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
 .visualconfig .mincolres,
 .visualconfig .colspacing {
 	display: inline-block;
@@ -308,6 +318,7 @@ of this particular design).*/
 	background-repeat: no-repeat;
 	width: 88%;
 	margin-left: 6%;
+	font-size: 110%;
 }
 
 .visualconfig .sim-pushbutton-disabled div.svg.active,

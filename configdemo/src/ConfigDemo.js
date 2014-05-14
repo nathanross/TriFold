@@ -239,6 +239,9 @@ new Replacer("TriFold_Example/TriFold-Demo.html",
 [replaceStyleValues,replaceConfigSection])
 ]);
 
+//window.downloadCallbacks[JS] = new ZipModder("resources/TriFold_Example.zip",ZipModder.URL,[],[
+window.stockDemoCallback = new ZipModder(function() { return window.TriFold_Example; },ZipModder.B64,[],[]);
+
 //window.downloadCallbacks[GWT] = new ZipModder("resources/GWTriFold_SampleApp.zip", ZipModder.URL,[],[
 window.downloadCallbacks[GWT] = new ZipModder(function() { return window.GWTriFold_Example; }, ZipModder.B64,[],[
 new Replacer("GWTriFold_SampleApp/src/com/website/sample/client/Sample.java",
@@ -344,7 +347,7 @@ function ConfigDemoJS(triFold, behavior, descriptPanel, configPanel, previewPane
 	var pane, codeWindow, wrapper, downloadSection, 
 		downloadButton, label, info, previewHeader;
 	
-  var makeDownloadClickHandler = function(language) {
+	var makeDownloadClickHandler = function(language) {
 		var r = function() { 
 			window.downloadCallbacks[language]({
 				configCode:t._genDownloadCfgText(language),
@@ -353,8 +356,8 @@ function ConfigDemoJS(triFold, behavior, descriptPanel, configPanel, previewPane
                  "DemoTriFoldJS.zip":"DemoGWTriFold.zip")});
 		};
 		return r;
-  };
-  for (i=0;i<2;i++) {
+	};
+	for (i=0;i<2;i++) {
 		pane = genElement(0, "pane");
 		previewHeader = genElement(pane, "previewheader em2");
 		previewHeader.innerHTML = "Code to add triFold to your page with this configuration.";
@@ -377,7 +380,9 @@ function ConfigDemoJS(triFold, behavior, descriptPanel, configPanel, previewPane
 	previewPanelInner.appendChild(t._previewTabpanel.getElement());
 	t._previewTabpanel._widthChanged();
 	
-	
+	var stockDownloadButton = document.getElementById("stockdemo");
+	stockDownloadButton.addEventListener("click", function() {
+		window.stockDemoCallback({filename:"DemoTriFoldJS.zip"}) });
 	
 	t._reloadBehavior = new (Similitude.PushButton)();
 	t._reloadBehavior.setEnabled(false);
@@ -1269,7 +1274,7 @@ _buildConfigColumn : function(column) {
 										pickstyleCallback);
 	visualPane.appendChild(styleSel.getElement());
 	
-	genLabel(visualPane, "em2","Customize the proportions of your app");	
+	genLabel(visualPane, "em2 buffertext","Customize the proportions of your app");	
 	xy = t._triFold.getMinColDimensions();
 	window.changedMinColRes(xy); 
 	//graceful degradation 
