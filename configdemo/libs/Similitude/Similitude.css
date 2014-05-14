@@ -38,6 +38,9 @@ div.svg.svginline > svg {
 	display: none;
 }
 
+.darkbgarea	div.svg.brightbg {
+	display: none !important; /* chrome svg logo problem fix */
+}
 /*END:SVG*/
 /*BEGIN:PUSHBUTTON*/
 
@@ -75,7 +78,6 @@ div.sim-togglediv-disabled.sim-border {
 
 div.sim-togglediv.sim-box {
 	display: block;
-	background: black;
 	padding: 1px;
 }
 
@@ -216,7 +218,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#070707', end
 }
 
 .sim-selectbox.sim-box {
-	background-color: black;
 	padding: 1px;
 }
 

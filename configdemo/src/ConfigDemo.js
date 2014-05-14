@@ -32,6 +32,7 @@ limitations under the License.
 */
 var JS=0;
 var GWT=1;
+window.CSS_OFFSET = 1;
 
 var svgInjector = Similitude.svgInjector;
 var SVGTools = Similitude.SVGTools;
@@ -55,13 +56,13 @@ var classListRemove = function(list, key) {
 
 window.changedMinColRes = function(xyMin) {
 	//console.log("stylesheets length:" document.styleSheets.length.toString());
-	var offset = 1;
+	var offset = window.CSS_OFFSET;
 	
 	var std = [240, 400];
 	var shadow = [4, 4];
 	var dist = [10, 10]; 
-	console.log("xymin 0 " + floatFmt(xyMin[0]) + 
-				"xymin 1 " + floatFmt(xyMin[1]));
+	//console.log("xymin 0 " + floatFmt(xyMin[0]) + 
+	//			"xymin 1 " + floatFmt(xyMin[1]));
 	var fact = (xyMin[0]/std[0] + xyMin[1]/std[1]) /2;
 	var shadowNew = [fact*shadow[0], fact*shadow[1]];
 	// var dimContent = [std[0]-(fact*dist[0]), std[1]-(fact*dist[1])];
@@ -93,7 +94,6 @@ window.changedMinColRes = function(xyMin) {
 };
 
 window.b64toBlob = function(str) {
-	console.log(str);
 	var decoded = atob(str);
 	var i, il = decoded.length;
 	var array = new Uint8Array(il);
@@ -278,7 +278,7 @@ var consoleLog = function(message) {
 						window.triFold.constructor.prototype)) {
 		window.triFold[0].debugLog("DEMO:"+message);
 	}
-	console.log(message);
+	//console.log(message);
 };
 //var check = function(obj, prop) {if (prop in (obj._proto_ || obj.constructor.prototype)) { return true; }return false;};
 
@@ -315,8 +315,15 @@ function ConfigDemoJS(triFold, behavior, descriptPanel, configPanel, previewPane
 			addSvg(btn[0], (j==0)?"gear-2":((j==1)?"note-11":"icon_6041"),0);
 		}
 	}
+	
+
 	var logo = document.body.getElementsByClassName("logo")[0];
-	addSvgVariantsBrightStroke(logo, "logo", "", 0);
+	//chrome has inconsistent rendering when you use svg filters.
+	//	at least gaussian filters. Sometimes it will render and display all
+	//	paths of the svg including those using a filter, othertimes it will
+	//	just display those that don't. 	
+	addSvgVariantsBrightStroke(logo, (bowser.webkit)? "chromelogo":"logo",
+				"", 0);
 	//for some reason chrome won't display this particular svg in this particular
 	// area unless we force it to redraw the block. To investigate further.
 	logo.style.display = "block"; 
@@ -387,6 +394,8 @@ function ConfigDemoJS(triFold, behavior, descriptPanel, configPanel, previewPane
 	t._previewTabpanel.setOnChange(function() { flt.rescan(false); });
 	t._configTabpanel.setOnChange(function() { flt.rescan(false); });
 	triFold.addScaleCallback(function(s) { flt.scaleCallback(s); });
+	
+	
 	t.refresh();
 }
 ConfigDemoJS.StyleSelector = function() {
@@ -1133,7 +1142,7 @@ ConfigDemoJS.prototype = {
 _pickDemoStyle : function(styleNum) {
 	//console.log("pick demo style called with stylenum " +
 	//styleNum.toString());
-	var offset = 1; //where the first demo style begins.
+	var offset = window.CSS_OFFSET; //where the first demo style begins.
 	var count=3; //number of demo styles
 	var el = this._triFold.getElement();
 	if (styleNum == 3) {

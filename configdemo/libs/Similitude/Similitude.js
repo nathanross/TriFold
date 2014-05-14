@@ -188,11 +188,12 @@ Similitude._FixedLineTool.prototype = {
 					.toString();
 			}
 			valComplete = valtmp;
-			// console.log("at scale " + scale.toString() + 
+			//console.log("at scale " + scale.toString() + 
 			//			" about to add rule <" + kv[0] + 
 			//			":" + valComplete + 
-			//			"> to " + this.items[cn][0].length.toString() 
-			//			+ " items of class " + cn);
+			//			"> to " + 
+			//			this.items[cn][0].length.toString() +
+			//			" items of class " + cn);
 			for (j=0;j<this.items[cn][0].length;j++) {
 				this.items[cn][0][j].style[kv[0]] = valComplete; 
 			}
@@ -225,7 +226,7 @@ var _initialize = function() {
 		flt.addItem("sim-listbox",
 		[["padding",true,["0px ", 1, "px ", 1, "px ", 1, "px "]]]);
 		flt.addItem("sim-listbox",
-		[["margin",true,[1, "px 0px 0px ", -1, "px"]]]);
+		[["margin",true,["0px 0px 0px ", -1, "px"]]]);
 		//[["boxShadow",true,[1, "px ", 1, "px 0px 0px"]]]);
 	} else {
 		flt.addItem("sim-listbox",
@@ -276,13 +277,16 @@ preprocess : function(svg) {
 			//if it comes with a viewbox, changing it could break it.
 			//many with a viewbox can _already_ be resized fine thru
 			//css height and width
+			
 			svg.setAttribute("viewBox", "0 0 " + 
 					floatFmt(pxToFloatSafe(w)) +
 					" " + 
 					floatFmt(pxToFloatSafe(h)));
 		}
+		
 		svg.setAttribute("x", "0px");
 		svg.setAttribute("y", "0px");
+		
 		svg.setAttribute("preserveAspectRatio","xMidYMid");
 	}
 },
@@ -465,6 +469,8 @@ setSvgCached : function(div,
 		srcIsString = (typeof(src) === "string") && src.length > 0,
 		srcIsEl = typeof(src) === "object",
 		hasMod = typeof(modkey)==="string" && modkey.length > 0;
+	
+	//
 	//console.log("srckey<"+srckey+"> src<"+src+"> style <"+style+"> modkey <"+modkey+">");
 	//console.log("srcInCache<"+srcInCache.toString()+"> hasMod<"+hasMod.toString()+">");
 
@@ -511,7 +517,7 @@ setSvgCached : function(div,
 		if (!inline) { 
 			text = cache[srckey+modkey];
 			serialized = true;
-		} else { el = cache[srckey+modkey]; }
+		} else { doClone=true; el = cache[srckey+modkey]; }
 		modded=true;
 	} else if (srckey in cache) {
 		el = cache[srckey];

@@ -49,39 +49,78 @@ padding-top: 2px;
 	border-left-color: white;
 }
 
-.darkbgarea .sim-selectbox.sim-box {
-	background-color: #FFFFFF;
-}
-.sim-selectbox.sim-box > div.sim-dispbg {
-	background-color: #3d434a;
+
+/* sim border */
+.sim-selectbox.sim-border,
+div.sim-togglediv-enabled.sim-border
+{
+	border-color: white;
 }
 
-.sim-selectbox.sim-box > div.sim-listbox > div {
+.sim-selectbox.sim-border > div.sim-listbox  {
+	border-color: #CCC;
+}
+.sim-selectbox.sim-border > div.sim-dispbg,
+div.sim-togglediv-enabled.sim-border .sim-togglediv-facebg {
+	background-color: #3d434a;
+}
+.sim-selectbox.sim-border > div.sim-listbox > div  {
 	background-color: #3d434a;
 	border-bottom: 1px solid #555555;
+	color: #FFF;
+}
+div.sim-togglediv-disabled.sim-border .sim-togglediv-facebg {
+	background-color: #888888;
 }
 
-.sim-selectbox > div.sim-listbox > div[data-hover="true"] {
-	/* background-color: #AAE;
-	color: #000000; */
+.sim-selectbox.sim-border > div.sim-listbox > div[data-hover="true"] {
 	background-color: #192934;
 }
+/* end sim border */
 
-.sim-selectbox > div.sim-listbox > div[data-hover="false"] {
+.darkbgarea .sim-selectbox.sim-box {
+	/* background-color: #FFFFFF; scalefix */
+}
+.sim-selectbox.sim-box > div.sim-dispbg {
+	/* background-color: #3d434a; scalefix */
+	background-color: #222;
+}
+
+.sim-selectbox.sim-box > div.sim-listbox > div:first-of-type {
+	border-top: 1px solid #333;
+}
+.sim-selectbox.sim-box > div.sim-listbox > div {
+	/* background-color: #3d434a; scalefix */
+	background-color: #222;
+	/* border-bottom: 1px solid #555555; scalefix */
+	border-bottom: 1px solid #333;
+}
+
+.sim-selectbox.sim-box > div.sim-listbox > div[data-hover="true"] {
+	/* background-color: #AAE;
+	color: #000000; */
+	/* background-color: #192934; scalefix */
+	
+	background-color: #224;
+}
+
+.sim-selectbox.sim-box > div.sim-listbox > div[data-hover="false"] {
 	color: #FFFFFF;
 }
 
 div.sim-togglediv-enabled.sim-box {
-	background-color: #FFFFFF;
+	/* background-color: #FFFFFF; scalefix */
 }
 div.sim-togglediv-enabled.sim-box .sim-togglediv-facebg {
-	background-color: #3d434a;
+	/* background-color: #3d434a; scalefix */
+	background-color: #222;
 }
 div.sim-togglediv-disabled.sim-box {
-	background-color: #888888;
+	/* background-color: #888888; scalefix */
 }
 div.sim-togglediv-disabled.sim-box .sim-togglediv-facebg {
-	background-color: #3d434a;
+	/* background-color: #3d434a; scalefix */
+	background-color: #666;
 }
 
 .sim-tab > .rightOfSelected {

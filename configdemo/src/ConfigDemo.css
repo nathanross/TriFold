@@ -122,7 +122,8 @@ body:not(.systemFontsOnly) {
 }
 
 body.systemFontsOnly {
-	font-family: Verdana, Arial;
+	font-family: Verdana, Arial,sans;
+	font-size: 90%;
 }
 
 div.tri-fold_outerParent:not(.systemFontsOnly) .em1 {

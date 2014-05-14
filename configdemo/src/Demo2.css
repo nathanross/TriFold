@@ -39,3 +39,49 @@ limitations under the License.
 .sim-tabpanels {
 	padding-top: 2px;
 }
+
+
+/* sim border */
+
+div.sim-togglediv-enabled.sim-border .sim-togglediv-facebg {
+	background-color: white;
+}
+div.sim-togglediv-disabled.sim-border .sim-togglediv-facebg {
+	background-color: #CCC;
+}
+
+/* this section can be removed once we apply the hairline
+	scalefix to similitude
+*/
+
+
+.darkbgarea .sim-selectbox.sim-box {
+}
+.sim-selectbox.sim-box > div.sim-dispbg {
+	background-color: #CDE;
+}
+
+.sim-selectbox.sim-box > div.sim-listbox > div:first-of-type {
+	border-top: 1px solid #BBD;
+}
+.sim-selectbox.sim-box > div.sim-listbox > div {
+	border-bottom: 1px solid #BBD;
+}
+
+.sim-selectbox.sim-box > div.sim-listbox > div[data-hover="true"] {
+}
+
+.sim-selectbox.sim-box > div.sim-listbox > div[data-hover="false"] {
+	background-color: #CDE;
+}
+
+div.sim-togglediv-enabled.sim-box {
+}
+div.sim-togglediv-enabled.sim-box .sim-togglediv-facebg {
+	background-color: #CDE;
+}
+div.sim-togglediv-disabled.sim-box {
+}
+div.sim-togglediv-disabled.sim-box .sim-togglediv-facebg {
+	background-color: #CCC;
+}
