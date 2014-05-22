@@ -380,7 +380,7 @@ function ConfigDemoJS(triFold, behavior, descriptPanel, configPanel, previewPane
 	previewPanelInner.appendChild(t._previewTabpanel.getElement());
 	t._previewTabpanel._widthChanged();
 	
-	var stockDownloadButton = document.getElementById("stockdemo");
+	var stockDownloadButton = descript.getElementsByClassName("stockdemo")[0];
 	stockDownloadButton.addEventListener("click", function() {
 		window.stockDemoCallback({filename:"DemoTriFoldJS.zip"}) });
 	

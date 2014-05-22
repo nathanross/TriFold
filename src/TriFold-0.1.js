@@ -732,9 +732,16 @@ resizeCallback : function(manual) {
 
 function FeatherTween() {
 	this.unresolvedAnims = {};
-	this.activeAnims = {};
+	this.activeAnimIds = {};
+	// unified clock actually leads to a performance hit, 
+	// likely because of the way we do calculations (some calculations
+	// are dependent on other calculations state changes). A more unified,
+	// managing step function would probably save time.
+	this.useClock = false;
+	if (this.useClock) 
+	{ this.clockStep(); };
 	//some anims may be superceded but still be unresolved.
-	this.animstepPause =3;
+	//this.animstepPause =3;
 }
 
 FeatherTween.prototype = {
@@ -755,19 +762,75 @@ FeatherTweenAnim: function(strkey, initval, endval, duration, startTime,
 },
 freeze : function() {	// void ()
 	var strkey;
-	for (strkey in this.activeAnims){
-		if (this.activeAnims.hasOwnProperty(strkey)) { //keep checkers happy
-			this.activeAnims[strkey] = -1;
+	for (strkey in this.activeAnimIds){
+		if (this.activeAnimIds.hasOwnProperty(strkey)) { //keep checkers happy
+			this.activeAnimIds[strkey] = -1;
 		}
 	}
 },
 _log : function(msg) //# void (String)
 	{ _debugger.log("FeatherTween:" + msg); }, //#
 getActiveAnim : function(strkey) // FeatherTweenAnim (string)
-	{ return this.unresolvedAnims[strkey][this.activeAnims[strkey]]; },
+	{ return this.unresolvedAnims[strkey][this.activeAnimIds[strkey]]; },
+shuffleArray : function(array) { //fisher-yates
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+},
+clockStep : function() {
+	var t = this;
+	var hasChildren, anim, strkey, animId, now;
+	var timeD, tweenDcomplete, timeProportion, tweenD;
+	now = (new Date()).getTime();
+	var strkeylist = [];
+	//needing to have variance in order columns are called
+	//and some related heisenbugs (e.g. end column outrunning outerWrapper
+	// when just loading the page (3 cols) on some page loads, not on others,
+	// given the exact same page dimensions)
+	//is a bug that will be ironed out in the move to a unified step.
+	for (strkey in t.unresolvedAnims) {
+		strkeylist.push(strkey);
+	}
+	strkeylist = this.shuffleArray(strkeylist);
+	for (var i=0;i<strkeylist.length;i++) {
+		strkey = strkeylist[i];
+		var hasChildren = false;
+		for (animId in t.unresolvedAnims[strkey]) {
+			anim = t.unresolvedAnims[strkey][animId];
+			if (anim.id !== t.activeAnimIds[strkey]) {
+				anim.cancelledCallback();
+				delete t.unresolvedAnims[strkey][animId];				
+				continue;
+			}
+			//now = (new Date()).getTime();
+			timeD = Math.max(0,now - anim.startTime);
+			tweenDcomplete = anim.endval - anim.initval;
+			timeProportion = timeD/ anim.duration;
+			if (timeProportion > 1) { timeProportion = 1; }
+			tweenD = anim.initval + (tweenDcomplete * timeProportion);
+			anim.stepCallback(tweenD);
+			if (timeProportion < 1) {		
+				hasChildren = true;
+			} else {
+				anim.completeCallback();
+				delete t.unresolvedAnims[anim.strkey][anim.id];
+				delete t.activeAnimIds[anim.strkey];
+			}
+		}
+		if (!hasChildren) {
+			delete t.unresolvedAnims[strkey];
+		}
+	}
+	var wrap = function() { t.clockStep(); }
+	window.reqAnimFrame(wrap);
+},
 animStep : function(anim) {	// void FeatherTweenAnim 
 	//this._log("anim step called for strkey <" + strkey + ">"); //#
-	if (anim.id == this.activeAnims[anim.strkey]) {
+	if (anim.id == this.activeAnimIds[anim.strkey]) {
 		var now = (new Date()).getTime();
 		var timeD = Math.max(0,now - anim.startTime);
 		var tweenDcomplete = anim.endval - anim.initval;
@@ -786,11 +849,12 @@ animStep : function(anim) {	// void FeatherTweenAnim
 			//this._log("anim<" + strkey + //#
 			// "called step callback successfully"); //#
 			var wrap = function() { that.animStep(anim); };
-			window.setTimeout(wrap, this.animstepPause);
+			//window.setTimeout(wrap, this.animstepPause);
+			window.reqAnimFrame(wrap);
 		} else {
 			anim.completeCallback();
 			delete this.unresolvedAnims[anim.strkey][anim.id];
-			delete this.activeAnims[anim.strkey];
+			delete this.activeAnimIds[anim.strkey];
 		}
 	} else {
 		anim.cancelledCallback();
@@ -805,15 +869,25 @@ startAnim : function(strkey, initval, endval, durationms,
 	var newAnim = new (t.FeatherTweenAnim)(strkey, initval, endval, 
 				durationms, (new Date()).getTime(), stepCallback, 
 				completeCallback, cancelledCallback);
-	if (!(strkey in t.activeAnims)) { t.activeAnims[strkey] = 0; }
-	t.activeAnims[strkey] = (t.activeAnims[strkey] +1) % 1000;
-	newAnim.id = t.activeAnims[strkey];
+	if (!(strkey in t.activeAnimIds)) { t.activeAnimIds[strkey] = 0; }
+	t.activeAnimIds[strkey] = (t.activeAnimIds[strkey] +1) % 1000;
+	newAnim.id = t.activeAnimIds[strkey];
 	if (!(strkey in t.unresolvedAnims)) {t.unresolvedAnims[strkey] = {}; }
 	t.unresolvedAnims[strkey][newAnim.id] = newAnim;
 	
-	t.animStep(newAnim);
+	if (! t.useClock) { t.animStep(newAnim); }
 }
 };
+
+window.reqAnimFrame =  (function(){
+  return  window.requestAnimationFrame       ||
+          window.webkitRequestAnimationFrame ||
+          window.mozRequestAnimationFrame    ||
+          function( callback ){
+            window.setTimeout(callback, 1000 / 60);
+          };
+})();
+
 
 // ------- End Feather Tween -----------
 // ------- Begin SlideMotion -----------
@@ -850,10 +924,10 @@ function SlideMotion() {
 	t._maxWidth = 1000;
 	t._reqWest=0.5;
 	t._padWest=0;
-	t._exWest = 0;
+	t._curWest = 0;
 	t._colX = 1;
 	t._colSpacing = 1;
-	t._slidespeed = 1000;
+	t._slidespeed = 800;
 	t._scalespeed = 400;
 }
 
@@ -950,7 +1024,7 @@ _centerInnerParent : function(newWidth) {
 	//remember, maxWidth is the maximum innerParent width available
 	//after already taking out minimum margins from the screen width
 	var extraMarginXremain = this._maxWidth - newWidth;
-	
+	var t = this;
 	this._log("center Inner Parent ingredients: minMarginX:" + //#
 		floatFmt(this._minMarginX) + " maxWidth:" + floatFmt(this._maxWidth) + //#
 		" newWidth:" + floatFmt(newWidth) + " reqWest:" + //#
@@ -963,8 +1037,19 @@ _centerInnerParent : function(newWidth) {
 	var marginWest = (this._minMarginX + (extraMarginXremain)) *
 								this._reqWest; // + this._padWest;
 	this._log("centerInner: setting left to " + //#
-		floatFmt(marginWest)); //#
-	this._elInnerParent.style.left = floatToPx(marginWest);
+		floatFmt(marginWest)); //# 
+	if (this._curWest == 0) { 
+		this._curWest = marginWest;
+		this._elInnerParent.style.left = floatToPx(marginWest);
+	} else {
+		var callback = function(d) {
+			console.log("d " + d.toString());
+			t._curWest = d;
+			t._elInnerParent.style.left = floatToPx(d);
+		}
+		this._tween.startAnim("marginLeft", this._curWest, marginWest,
+		5, callback, function(){}, function(){});
+	}
 },
 setSlidespeed : function(speed)	// void (float) 
 	{ this._slidespeed = speed; },
@@ -1323,10 +1408,10 @@ _slideCompleteCallback : function(strkey) {
 					floatToPx(t._colDest[colnum]);
 			t._columnEnds[colnum] = t._colDest[colnum] + t._colX;
 			
-			t._log("ANIM: movecol col:" + floatFmt(colnum) + //#
+			/*t._log("ANIM: movecol col:" + floatFmt(colnum) + //#
 				" finished at left : " + floatFmt(t._colDest[colnum]) + //#
 				" columnEnd is " + floatFmt(t._columnEnds[colnum]) + //#
-				" setting Z to " + t.colZDest[colnum].toString()); //#
+				" setting Z to " + t.colZDest[colnum].toString()); */ //#
 			t._colResizeParent[colnum] = true;
 			t._colSrc[colnum] = t._colDest[colnum];
 			t._colDestReached[colnum] = true;
